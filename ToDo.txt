@@ -1,0 +1,14 @@
+ToDo CRUD App
+
+1. Make a starter list
+2. Make an input that will allow us to add items to the list
+3. Add an 'X' on each item so we can delete items
+4. Add an 'Edit' mark on each item so we can edit items
+
+What components do we need
+1. listItem component - { listText, delBtn, editBtn }
+
+
+Extra stuff
+1. Make ability to add extra lists
+2. Store lists in local data?
