@@ -10,7 +10,6 @@ class ListItem extends React.Component {
       }
     
     render() {
-        console.log(this.props)
         const listItems = this.props.toDoItems.map((item, index) => 
             <li key={item + '-' + index}>
                 <div className={"indv-item item-" + index} >
@@ -20,11 +19,13 @@ class ListItem extends React.Component {
                         <button className="submitEdit" onClick={() => this.props.editItem(item, document.querySelector('.editValueFor-' + item).value)}>Add</button>
                     </div>
                 </div>
-                <button className={"deleteItem item-" + index} onClick={() => this.props.deleteItem(item)}>-</button>
-                <button className="editBtn" onClick={() => {
+                <div className="itemBtns">
+                <button className={"btn deleteItem item-" + index} onClick={() => this.props.deleteItem(item)}>X</button>
+                <button className="btn editBtn" onClick={() => {
                     document.querySelector('.indvListItem-' + item).style.display = 'none';
                     document.querySelector('.editBarFor-' + item).style.display = 'initial';
-                }}>~</button>
+                }}>Edit</button>
+                </div>
             </li>
         );
     

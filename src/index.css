@@ -1,10 +1,10 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: #e8e7e7; 
+  font-family: 'Open Sans';
+  text-transform: uppercase !important;
 }
 
 code {
@@ -14,4 +14,142 @@ code {
 
 .editBar {
   display: none;
+}
+
+ul {
+  list-style-type: none;
+  padding:0;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+li {
+  display: flex;
+  justify-content: space-between;
+  padding:15px;
+  position: relative;
+  display: flex;
+  font-size: 1.2em;
+  border-bottom: solid 3px #EEEEEE;
+  letter-spacing: 2px;
+  color: #2F2366;
+  flex-grow: 1;
+  padding-left: 25px;
+}
+
+li:last-child {
+  border-bottom-color: #D4CAFF;
+}
+
+.editBtn {
+  right: 0;
+}
+
+.deleteItem {
+  right: 62px;
+}
+
+.btn {
+  position: absolute;
+  height: 57px;
+  top: 0;
+  border-radius: 0;
+  width: 60px;
+  outline: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  cursor: pointer;
+  background: #dcdcda;
+  border: none;
+  font-weight: 700;
+}
+
+.btn:hover {
+  color: white;
+}
+
+h1 {
+  flex-grow: 1;
+  font-size: 1.5em;
+  letter-spacing: 2px;
+  font-weight: normal;
+}
+
+.header {
+  color: #FFF;
+  padding: 5px 10px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  background-color: #5B45B9;
+  border-bottom: solid 2px #D4CAFF;
+}
+
+input[type=text] {
+  flex-grow: 1;
+  border-width: 0 0 1px 0;
+  margin: 15px 10px 15px 15px;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #5B45B9;
+  border-style: none;
+  text-shadow: none;
+  text-transform: uppercase;
+  color: #C7BCF8;
+  letter-spacing: 2px;
+  outline: none;
+}
+
+input[type=text]::-webkit-input-placeholder{
+  color: #C7BCF8;
+  letter-spacing: 2px;
+}
+
+input[type=text]:focus{
+  background-color: rgba(0, 0, 0, 0.2);
+  color: #5B45B9
+}
+
+.deleteItem:hover {
+  background: #EF5350;
+  border: solid grey 0;
+}
+
+.editBtn:hover {
+  background: #ff851b;
+  border: solid grey 0px;
+}
+
+.newToDoItem {
+  display: flex;
+  justify-content: space-around;
+  max-width: 60%;
+  margin: auto;
+}
+
+button {
+  text-transform: uppercase;
+  font-family: 'Open Sans';
+  letter-spacing: 2px;
+  
+}
+
+.newToDoItem button {
+  margin: 15px 10px 15px 15px;
+  border: none;
+  border-radius: 5px;
+  padding: 0 10px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.newToDoItem button:hover {
+  background: #2ecc40;
+  color: white;
+}
+
+.addNewToDoItem {
+  margin: 0;
+  margin-right: 25px;
+  margin-bottom: 15px;
 }

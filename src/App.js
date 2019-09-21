@@ -16,7 +16,6 @@ function App() {
 
   const editItem = (itemToEdit, updatedText) => {
     const indexOfItemToEdit = listText.indexOf(itemToEdit);
-    console.log(itemToEdit, updatedText);
     listText[indexOfItemToEdit] = updatedText;
     setListText(
       [...listText]
@@ -25,13 +24,21 @@ function App() {
 
   return (
     <div className="App">
-      <h1>React To-Do App</h1>
+      <div class="header">
+        <h1>React To-Do App</h1>
+      </div>
       <div className="list-container">
         <ListItems toDoItems={listText} deleteItem={deleteItem} editItem={editItem}/>
       </div>
       <div className="newToDoItem">
-        <input type="text" className="addNewToDoItem"/>
-        <button onClick={() => setListText(listText => [...listText, document.querySelector('.addNewToDoItem').value]) }>+</button>
+        <input type="text" className="addNewToDoItem" placeholder="Get Apples"/>
+        <button onClick={() => {
+          if(document.querySelector('.addNewToDoItem').value == '') {
+            console.log('doing nothing');
+          } else {
+            setListText(listText => [...listText, document.querySelector('.addNewToDoItem').value])
+          }
+        }}>Add Item</button>
       </div>
     </div>
   );
