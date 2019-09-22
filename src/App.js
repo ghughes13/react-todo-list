@@ -15,15 +15,18 @@ function App() {
   };
 
   const editItem = (itemToEdit, updatedText) => {
-    console.log(itemToEdit)
+    if(updatedText === itemToEdit) {
+      console.log('.indvListItem-' + itemToEdit.split(' ').join('-'))
+      document.querySelector('.indvListItem-' + itemToEdit.split(' ').join('-')).style.display = 'initial';
+      document.querySelector('.editBarFor-' + itemToEdit.split(' ').join('-')).style.display = 'none';
+    }
     const indexOfItemToEdit = listText.indexOf(itemToEdit);
+    console.log(indexOfItemToEdit, updatedText)
     listText[indexOfItemToEdit] = updatedText;
     setListText(
       [...listText]
     )
   };
-
-  console.log(listText)
 
   return (
     <div className="App">

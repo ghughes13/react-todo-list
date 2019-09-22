@@ -24,7 +24,6 @@ class ListItem extends React.Component {
                 </div>
                 <div className="itemBtns">
                 <button className="btn editBtn" onClick={() => { 
-                    console.log(item);
                     document.querySelector('.indvListItem-' + item.split(' ').join('-')).style.display = 'none';
                     document.querySelector('.editBarFor-' + item.split(' ').join('-')).style.display = 'initial';
                 }}>Edit</button>
