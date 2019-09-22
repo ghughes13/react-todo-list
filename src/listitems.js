@@ -15,7 +15,7 @@ class ListItem extends React.Component {
                 <div className={"indv-item item-" + index} >
                     <span className={"indvListItem-" + item.split(' ').join('-')}>{item}</span>
                     <div className={"editBar editBarFor-" + item.split(' ').join('-')}>
-                        <input type="text" className={'editValueFor-' + item.split(' ').join('-')} defaultValue={item}></input>
+                        <input type="text" className={'editInput editValueFor-' + item.split(' ').join('-')} defaultValue={item}></input>
                         <button 
                             className="submitEdit" 
                             onClick={() => this.props.editItem(item, document.querySelector('.editValueFor-' + item.split(' ').join('-')).value)}>Add
@@ -23,15 +23,15 @@ class ListItem extends React.Component {
                     </div>
                 </div>
                 <div className="itemBtns">
-                <button 
-                    className={"btn deleteItem item-" + index} 
-                    onClick={() => this.props.deleteItem(item)}>X
-                </button>
                 <button className="btn editBtn" onClick={() => { 
                     console.log(item);
                     document.querySelector('.indvListItem-' + item.split(' ').join('-')).style.display = 'none';
                     document.querySelector('.editBarFor-' + item.split(' ').join('-')).style.display = 'initial';
                 }}>Edit</button>
+                <button 
+                    className={"btn deleteItem item-" + index} 
+                    onClick={() => this.props.deleteItem(item)}>X
+                </button>
                 </div>
             </li>
         );

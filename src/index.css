@@ -42,11 +42,11 @@ li:last-child {
 }
 
 .editBtn {
-  right: 0;
+  right: 62px;
 }
 
 .deleteItem {
-  right: 62px;
+  right: 0;
 }
 
 .btn {
@@ -133,7 +133,8 @@ button {
   
 }
 
-.newToDoItem button {
+.newToDoItem button,
+.editBar .submitEdit {
   margin: 15px 10px 15px 15px;
   border: none;
   border-radius: 5px;
@@ -143,7 +144,8 @@ button {
   font-weight: 700;
 }
 
-.newToDoItem button:hover {
+.newToDoItem button:hover,
+.editBar .submitEdit:hover {
   background: #2ecc40;
   color: white;
 }
@@ -152,4 +154,15 @@ button {
   margin: 0;
   margin-right: 25px;
   margin-bottom: 15px;
+}
+
+input.editInput,
+.editBar .submitEdit {
+  margin: -20px 15px -20px 0;
+}
+
+.editBar .submitEdit {
+  height: 35px;
+  padding: 0 15px;
+  text-align: center;
 }
