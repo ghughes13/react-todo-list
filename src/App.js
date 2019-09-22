@@ -4,7 +4,7 @@ import ListItems from './listitems';
 
 function App() {
 
-  const [listText, setListText] = useState(['Laundry', 'Dishes']);
+  const [listText, setListText] = useState(['Fold Laundry', 'Do The Dishes', 'Workout', 'Vacuume']);
 
   const deleteItem = (itemToDelete) => {
     const indexOfItemToDel = listText.indexOf(itemToDelete);
@@ -15,6 +15,7 @@ function App() {
   };
 
   const editItem = (itemToEdit, updatedText) => {
+    console.log(itemToEdit)
     const indexOfItemToEdit = listText.indexOf(itemToEdit);
     listText[indexOfItemToEdit] = updatedText;
     setListText(
@@ -22,9 +23,11 @@ function App() {
     )
   };
 
+  console.log(listText)
+
   return (
     <div className="App">
-      <div class="header">
+      <div className="header">
         <h1>React To-Do App</h1>
       </div>
       <div className="list-container">
@@ -33,7 +36,7 @@ function App() {
       <div className="newToDoItem">
         <input type="text" className="addNewToDoItem" placeholder="Get Apples"/>
         <button onClick={() => {
-          if(document.querySelector('.addNewToDoItem').value == '') {
+          if(document.querySelector('.addNewToDoItem').value === '') {
             console.log('doing nothing');
           } else {
             setListText(listText => [...listText, document.querySelector('.addNewToDoItem').value])

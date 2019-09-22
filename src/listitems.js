@@ -13,17 +13,24 @@ class ListItem extends React.Component {
         const listItems = this.props.toDoItems.map((item, index) => 
             <li key={item + '-' + index}>
                 <div className={"indv-item item-" + index} >
-                    <span className={"indvListItem-" + item}>{item}</span>
-                    <div className={"editBar editBarFor-" + item}>
-                        <input type="text" className={'editValueFor-' + item} defaultValue={item}></input>
-                        <button className="submitEdit" onClick={() => this.props.editItem(item, document.querySelector('.editValueFor-' + item).value)}>Add</button>
+                    <span className={"indvListItem-" + item.split(' ').join('-')}>{item}</span>
+                    <div className={"editBar editBarFor-" + item.split(' ').join('-')}>
+                        <input type="text" className={'editValueFor-' + item.split(' ').join('-')} defaultValue={item}></input>
+                        <button 
+                            className="submitEdit" 
+                            onClick={() => this.props.editItem(item, document.querySelector('.editValueFor-' + item.split(' ').join('-')).value)}>Add
+                        </button>
                     </div>
                 </div>
                 <div className="itemBtns">
-                <button className={"btn deleteItem item-" + index} onClick={() => this.props.deleteItem(item)}>X</button>
-                <button className="btn editBtn" onClick={() => {
-                    document.querySelector('.indvListItem-' + item).style.display = 'none';
-                    document.querySelector('.editBarFor-' + item).style.display = 'initial';
+                <button 
+                    className={"btn deleteItem item-" + index} 
+                    onClick={() => this.props.deleteItem(item)}>X
+                </button>
+                <button className="btn editBtn" onClick={() => { 
+                    console.log(item);
+                    document.querySelector('.indvListItem-' + item.split(' ').join('-')).style.display = 'none';
+                    document.querySelector('.editBarFor-' + item.split(' ').join('-')).style.display = 'initial';
                 }}>Edit</button>
                 </div>
             </li>
