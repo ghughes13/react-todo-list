@@ -1,6 +1,6 @@
 Created a basic ToDo List in React
 
-See the project: https://ghughes-react-todo-list.herokuapp.com/
+<a href="https://ghughes-react-todo-list.herokuapp.com/" target="_blank">See the project</a> 
 
 App that allows you to create, edit and delete a todo list.
 
