@@ -4,7 +4,12 @@ import ListItems from './listitems';
 
 function App() {
 
-  const [listText, setListText] = useState(['Fold Laundry', 'Do The Dishes', 'Workout', 'Vacuume']);
+  if(window.localStorage.getItem('todo') == null) {
+    console.log('it was empty');
+    window.localStorage.setItem('todo', ['Fold Laundry', 'Do The Dishes', 'Workout', 'Vacuume']);
+  }
+
+  const [listText, setListText] = useState(window.localStorage.getItem('todo').split(','));
 
   const deleteItem = (itemToDelete) => {
     const indexOfItemToDel = listText.indexOf(itemToDelete);
