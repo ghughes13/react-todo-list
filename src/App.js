@@ -4,32 +4,37 @@ import ListItems from './listitems';
 
 function App() {
 
-  if(window.localStorage.getItem('todo') == null) {
-    console.log('it was empty');
+  if(window.localStorage.getItem('todo') == null) { //Check if localdata is set for 'todo'
     window.localStorage.setItem('todo', ['Fold Laundry', 'Do The Dishes', 'Workout', 'Vacuume']);
   }
 
   const [listText, setListText] = useState(window.localStorage.getItem('todo').split(','));
 
+  const getLocalData = () => { //Returns an array of the todo list items
+    return window.localStorage.getItem('todo').split(',');
+  }
+
   const deleteItem = (itemToDelete) => {
-    const indexOfItemToDel = listText.indexOf(itemToDelete);
-    listText.splice(indexOfItemToDel,1);
+    let localToDo = getLocalData() 
+    const indexOfItemToDel = localToDo.indexOf(itemToDelete); 
+    localToDo.splice(indexOfItemToDel,1); //Remove Item
+    window.localStorage.setItem('todo', localToDo)
     setListText(
-      [...listText]
+      [window.localStorage.getItem('todo').split(',')]
     )
   };
 
   const editItem = (itemToEdit, updatedText) => {
+    let localToDo = getLocalData();
     if(updatedText === itemToEdit) {
-      console.log('.indvListItem-' + itemToEdit.split(' ').join('-'))
       document.querySelector('.indvListItem-' + itemToEdit.split(' ').join('-')).style.display = 'initial';
       document.querySelector('.editBarFor-' + itemToEdit.split(' ').join('-')).style.display = 'none';
     }
-    const indexOfItemToEdit = listText.indexOf(itemToEdit);
-    console.log(indexOfItemToEdit, updatedText)
-    listText[indexOfItemToEdit] = updatedText;
+    const indexOfItemToEdit = localToDo.indexOf(itemToEdit);
+    localToDo[indexOfItemToEdit] = updatedText;
+    window.localStorage.setItem('todo', localToDo)
     setListText(
-      [...listText]
+      [window.localStorage.getItem('todo').split(',')]
     )
   };
 

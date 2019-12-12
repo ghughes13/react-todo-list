@@ -7,9 +7,11 @@ class ListItem extends React.Component {
         this.state = {
             counter: 0 
         };
-      }
-    
+    }
+
     render() {
+        console.log(this.props.toDoItems[0])
+        console.log(this.props.toDoItems.map((item, index) => item.split(' ').join('-')));
         const listItems = this.props.toDoItems.map((item, index) => 
             <li key={item + '-' + index}>
                 <div className={"indv-item item-" + index} >
