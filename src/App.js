@@ -20,7 +20,7 @@ function App() {
     localToDo.splice(indexOfItemToDel,1); //Remove Item
     window.localStorage.setItem('todo', localToDo)
     setListText(
-      [window.localStorage.getItem('todo').split(',')]
+      window.localStorage.getItem('todo').split(',')
     )
   };
 
@@ -34,7 +34,7 @@ function App() {
     localToDo[indexOfItemToEdit] = updatedText;
     window.localStorage.setItem('todo', localToDo)
     setListText(
-      [window.localStorage.getItem('todo').split(',')]
+      window.localStorage.getItem('todo').split(',')
     )
   };
 
@@ -52,7 +52,8 @@ function App() {
           if(document.querySelector('.addNewToDoItem').value === '') {
             console.log('doing nothing');
           } else {
-            setListText(listText => [...listText, document.querySelector('.addNewToDoItem').value])
+            console.log(window.localStorage.getItem('todo').split(',').concat([(document.querySelector('.addNewToDoItem').value)]))
+            setListText()
           }
         }}>Add Item</button>
       </div>

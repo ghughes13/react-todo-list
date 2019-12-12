@@ -10,8 +10,9 @@ class ListItem extends React.Component {
     }
 
     render() {
-        console.log(this.props.toDoItems[0])
-        console.log(this.props.toDoItems.map((item, index) => item.split(' ').join('-')));
+        // console.log('length -> ' + this.props.toDoItems.length)
+        // console.log(this.props.toDoItems);
+        // console.log('mapped -> ' + this.props.toDoItems.map((item, index) => item.split(' ').join('-')));
         const listItems = this.props.toDoItems.map((item, index) => 
             <li key={item + '-' + index}>
                 <div className={"indv-item item-" + index} >
