@@ -44,15 +44,15 @@ function App() {
         <h1>React To-Do App</h1>
       </div>
       <div className="list-container">
-        <ListItems toDoItems={listText} deleteItem={deleteItem} editItem={editItem}/>
+        <ListItems toDoItems={getLocalData} deleteItem={deleteItem} editItem={editItem}/>
       </div>
       <div className="newToDoItem">
         <input type="text" className="addNewToDoItem" placeholder="Get Apples"/>
         <button onClick={() => {
           if(document.querySelector('.addNewToDoItem').value === '') {
-            console.log('doing nothing');
+            // console.log('doing nothing');
           } else {
-            console.log(window.localStorage.getItem('todo').split(',').concat([(document.querySelector('.addNewToDoItem').value)]))
+            // console.log(window.localStorage.getItem('todo').split(',').concat([(document.querySelector('.addNewToDoItem').value)]))
             setListText()
           }
         }}>Add Item</button>

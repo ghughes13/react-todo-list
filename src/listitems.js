@@ -5,14 +5,16 @@ class ListItem extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            counter: 0 
+            counter: 0, 
+            hasrun : 0
         };
     }
 
     render() {
-        // console.log('length -> ' + this.props.toDoItems.length)
-        // console.log(this.props.toDoItems);
-        // console.log('mapped -> ' + this.props.toDoItems.map((item, index) => item.split(' ').join('-')));
+        // console.log(this.props.toDoItems());
+        // console.log('length -> ' + this.props.toDoItems())
+        // console.log('mapped -> ' + this.props.toDoItems().map((item, index) => item.split(' ').join('-')));
+        // console.log("===============================")
         const listItems = this.props.toDoItems.map((item, index) => 
             <li key={item + '-' + index}>
                 <div className={"indv-item item-" + index} >
