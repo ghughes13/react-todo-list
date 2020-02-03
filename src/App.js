@@ -2,9 +2,20 @@ import React, {useState} from 'react';
 import './App.css';
 import ListItems from './listitems';
 
+
+
 function App() {
 
   const [listText, setListText] = useState(['Fold Laundry', 'Do The Dishes', 'Workout', 'Vacuume']);
+
+  const MongoClient = require('mongodb').MongoClient;
+  const uri = "mongodb+srv://adminGuy9er9er:AtlasShrugged@todolist900-qitpr.mongodb.net/test?retryWrites=true&w=majority";
+  const client = new MongoClient(uri, { useNewUrlParser: true });
+  client.connect(err => {
+    const collection = client.db("test").collection("devices");
+    console.log(collection)
+    client.close();
+  });
 
   const deleteItem = (itemToDelete) => {
     const indexOfItemToDel = listText.indexOf(itemToDelete);
