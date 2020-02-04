@@ -1,21 +1,32 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect } from 'react';
 import './App.css';
 import ListItems from './listitems';
-
+import axios from 'axios';
 
 
 function App() {
 
   const [listText, setListText] = useState(['Fold Laundry', 'Do The Dishes', 'Workout', 'Vacuume']);
+  const [listData, setlistData] = useState([])
 
-  const MongoClient = require('mongodb').MongoClient;
-  const uri = "mongodb+srv://adminGuy9er9er:AtlasShrugged@todolist900-qitpr.mongodb.net/test?retryWrites=true&w=majority";
-  const client = new MongoClient(uri, { useNewUrlParser: true });
-  client.connect(err => {
-    const collection = client.db("test").collection("devices");
-    console.log(collection)
-    client.close();
-  });
+  useEffect(() => {
+    try {
+    axios
+    .get("http://localhost:9000/getData")
+    .then(data => setlistData(data));
+    } catch(error) {
+      console.log('error: ', error);
+    }
+
+    
+    axios.post(`http://localhost:9000/logData`, 'testing')
+    .then(res => {
+      console.log(res);
+      console.log(res.data);
+    })
+  }, []);
+
+  console.log(listData)
 
   const deleteItem = (itemToDelete) => {
     const indexOfItemToDel = listText.indexOf(itemToDelete);
