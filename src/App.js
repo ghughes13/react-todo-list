@@ -10,23 +10,35 @@ function App() {
   const [listData, setlistData] = useState([])
 
   useEffect(() => {
+
+
     try {
     axios
     .get("http://localhost:9000/getData")
-    .then(data => setlistData(data));
+    .then(data => setlistData(data))
+    .then(data => console.log(data))
     } catch(error) {
       console.log('error: ', error);
     }
 
-    
-    axios.post(`http://localhost:9000/logData`, 'testing')
-    .then(res => {
-      console.log(res);
-      console.log(res.data);
-    })
-  }, []);
+    let dataToReturn = {
+      body: 'testing to see if this counts'
+    }
 
-  console.log(listData)
+    try {
+    axios({
+      method: 'post',
+      url: 'http://localhost:9000/logData',
+      timeout: 4000,    // 4 seconds timeout
+      data: {
+        firstName: 'David',
+        lastName: 'Pollock'
+      }
+    })} catch(error) {
+      console.log('post error: ', error)
+    }
+
+  }, []);
 
   const deleteItem = (itemToDelete) => {
     const indexOfItemToDel = listText.indexOf(itemToDelete);
@@ -42,6 +54,7 @@ function App() {
       document.querySelector('.indvListItem-' + itemToEdit.split(' ').join('-')).style.display = 'initial';
       document.querySelector('.editBarFor-' + itemToEdit.split(' ').join('-')).style.display = 'none';
     }
+
     const indexOfItemToEdit = listText.indexOf(itemToEdit);
     console.log(indexOfItemToEdit, updatedText)
     listText[indexOfItemToEdit] = updatedText;
