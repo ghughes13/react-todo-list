@@ -10,35 +10,18 @@ function App() {
   const [listData, setlistData] = useState([])
 
   useEffect(() => {
-
-
+    //Request data from server to populate the todolist
     try {
-    axios
-    .get("http://localhost:9000/getData")
-    .then(data => setlistData(data))
-    .then(data => console.log(data))
+      axios
+      .get("http://localhost:9000/getData")
+      .then(data => setlistData(data))
+      // .then(data => console.log(data))
     } catch(error) {
       console.log('error: ', error);
     }
-
-    let dataToReturn = {
-      body: 'testing to see if this counts'
-    }
-
-    try {
-    axios({
-      method: 'post',
-      url: 'http://localhost:9000/logData',
-      timeout: 4000,    // 4 seconds timeout
-      data: {
-        firstName: 'David',
-        lastName: 'Pollock'
-      }
-    })} catch(error) {
-      console.log('post error: ', error)
-    }
-
   }, []);
+
+  console.log('list Data: ', listData);
 
   const deleteItem = (itemToDelete) => {
     const indexOfItemToDel = listText.indexOf(itemToDelete);
@@ -63,26 +46,48 @@ function App() {
     )
   };
 
-  return (
-    <div className="App">
-      <div className="header">
-        <h1>React To-Do App</h1>
+  const addNewItem = (itemToAdd) => {
+    console.log(itemToAdd)
+
+    var body = {
+      title: itemToAdd
+    };
+
+
+    axios.post('http://localhost:9000/addNew', body)
+    .then(function (response) {
+        console.log(response);
+    }).catch(function (error) {
+      console.log(error);
+    });
+  }
+
+  if(listData.length !== 0) {
+    console.log('got data')
+    console.log(listData)
+    return (
+      <div className="App">
+        <div className="header">
+          <h1>React To-Do App</h1>
+        </div>
+        <div className="list-container">
+          <ListItems toDoItems={listData} deleteItem={deleteItem} editItem={editItem}/>
+        </div>
+        <div className="newToDoItem">
+          <input type="text" className="addNewToDoItem" placeholder="Get Apples"/>
+          <button onClick={() => {
+            if(document.querySelector('.addNewToDoItem').value === '') {
+              console.log('doing nothing');
+            } else {
+              addNewItem(document.querySelector('.addNewToDoItem').value)
+            }
+          }}>Add Item</button>
+        </div>
       </div>
-      <div className="list-container">
-        <ListItems toDoItems={listText} deleteItem={deleteItem} editItem={editItem}/>
-      </div>
-      <div className="newToDoItem">
-        <input type="text" className="addNewToDoItem" placeholder="Get Apples"/>
-        <button onClick={() => {
-          if(document.querySelector('.addNewToDoItem').value === '') {
-            console.log('doing nothing');
-          } else {
-            setListText(listText => [...listText, document.querySelector('.addNewToDoItem').value])
-          }
-        }}>Add Item</button>
-      </div>
-    </div>
-  );
+    );
+  } else {
+    return <h1>Loading...</h1>
+  }
 }
 
 export default App;
