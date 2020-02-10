@@ -10,36 +10,45 @@ function App() {
   const [listData, setlistData] = useState([])
 
   useEffect(() => {
-    //Request data from server to populate the todolist
+    updateToDoList()
+  }, []);
+
+  const updateToDoList = () => {
+    console.log('about to run axios but');
     try {
       axios
       .get("http://localhost:9000/getData")
       .then(data => setlistData(data))
-      // .then(data => console.log(data))
     } catch(error) {
-      console.log('error: ', error);
+      console.error('error: ', error);
     }
-  }, []);
+  }
 
-  console.log('list Data: ', listData);
+  const getElementID = (el) => { //GETS THE DB ID ASSOCIATED WITH AN ITEM 
+      for(let i = 0; i < listData.data.length; i ++) {
+        if(listData.data[i].title === el) {
+          return listData.data[i]._id;
+        } 
+    }
+  }
 
   const deleteItem = (itemToDelete) => {
-    const indexOfItemToDel = listText.indexOf(itemToDelete);
-    listText.splice(indexOfItemToDel,1);
-    setListText(
-      [...listText]
-    )
+    axios({
+      method: 'delete',
+      url: 'http://localhost:9000/delItem',
+      data: {
+        delThis: getElementID(itemToDelete)
+      }
+    });
   };
 
   const editItem = (itemToEdit, updatedText) => {
     if(updatedText === itemToEdit) {
-      console.log('.indvListItem-' + itemToEdit.split(' ').join('-'))
       document.querySelector('.indvListItem-' + itemToEdit.split(' ').join('-')).style.display = 'initial';
       document.querySelector('.editBarFor-' + itemToEdit.split(' ').join('-')).style.display = 'none';
     }
 
     const indexOfItemToEdit = listText.indexOf(itemToEdit);
-    console.log(indexOfItemToEdit, updatedText)
     listText[indexOfItemToEdit] = updatedText;
     setListText(
       [...listText]
@@ -47,24 +56,15 @@ function App() {
   };
 
   const addNewItem = (itemToAdd) => {
-    console.log(itemToAdd)
-
-    var body = {
-      title: itemToAdd
-    };
-
-
-    axios.post('http://localhost:9000/addNew', body)
+    axios.post('http://localhost:9000/addNew', {title: itemToAdd}) 
     .then(function (response) {
-        console.log(response);
-    }).catch(function (error) {
-      console.log(error);
+
+    }).then(updateToDoList).catch(function (error) {
+      console.error(error);
     });
   }
 
   if(listData.length !== 0) {
-    console.log('got data')
-    console.log(listData)
     return (
       <div className="App">
         <div className="header">
@@ -77,7 +77,7 @@ function App() {
           <input type="text" className="addNewToDoItem" placeholder="Get Apples"/>
           <button onClick={() => {
             if(document.querySelector('.addNewToDoItem').value === '') {
-              console.log('doing nothing');
+              console.log('No items, adding new');
             } else {
               addNewItem(document.querySelector('.addNewToDoItem').value)
             }
