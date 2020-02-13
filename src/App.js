@@ -6,19 +6,19 @@ import axios from 'axios';
 
 function App() {
 
-  const [listText, setListText] = useState(['Fold Laundry', 'Do The Dishes', 'Workout', 'Vacuume']);
   const [listData, setlistData] = useState([])
 
   useEffect(() => {
-    updateToDoList()
+    requestToDoList()
   }, []);
 
-  const updateToDoList = () => {
-    console.log('about to run axios but');
+  const requestToDoList = () => {
     try {
       axios
       .get("http://localhost:9000/getData")
       .then(data => setlistData(data))
+      .then(console.log(listData))
+      .then(console.log('ran reqntd'));
     } catch(error) {
       console.error('error: ', error);
     }
@@ -32,7 +32,7 @@ function App() {
     }
   }
 
-  const deleteItem = (itemToDelete) => {
+  const deleteItem = (itemToDelete) => { //
     axios({
       method: 'delete',
       url: 'http://localhost:9000/delItem',
@@ -43,23 +43,34 @@ function App() {
   };
 
   const editItem = (itemToEdit, updatedText) => {
+    console.log(itemToEdit)
     if(updatedText === itemToEdit) {
-      document.querySelector('.indvListItem-' + itemToEdit.split(' ').join('-')).style.display = 'initial';
-      document.querySelector('.editBarFor-' + itemToEdit.split(' ').join('-')).style.display = 'none';
+      document.querySelector('.indvListItem-' + itemToEdit).style.display = 'initial';
+      document.querySelector('.editBarFor-' + itemToEdit).style.display = 'none';
     }
 
-    const indexOfItemToEdit = listText.indexOf(itemToEdit);
-    listText[indexOfItemToEdit] = updatedText;
-    setListText(
-      [...listText]
-    )
+    axios({
+      method: 'put',
+      url: 'http://localhost:9000/updateItem',
+      data: {
+        editThis: itemToEdit,
+        newText: updatedText
+      }
+    }).then(function (response) {
+      console.log(response)
+    })
+    
+    document.querySelector('.indvListItem-' + itemToEdit).style.display = 'initial';
+    document.querySelector('.editBarFor-' + itemToEdit).style.display = 'none';
   };
 
   const addNewItem = (itemToAdd) => {
     axios.post('http://localhost:9000/addNew', {title: itemToAdd}) 
     .then(function (response) {
-
-    }).then(updateToDoList).catch(function (error) {
+      if(response.status === 200) {
+        requestToDoList();
+      }
+    }).then(requestToDoList).catch(function (error) {
       console.error(error);
     });
   }

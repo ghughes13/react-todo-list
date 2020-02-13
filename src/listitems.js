@@ -13,23 +13,23 @@ class ListItem extends React.Component {
 
         let listItems;
 
-        console.log(this.state.props.data[0].title) 
         listItems = this.state.props.data.map((item, index) => 
             <li key={item.title + '-' + index}>
                 <div className={"indv-item item-" + index} >
-                    <span className={"indvListItem-" + item.title.split(' ').join('-')}>{item.title}</span>
-                    <div className={"editBar editBarFor-" + item.title.split(' ').join('-')}>
-                        <input type="text" className={'editInput editValueFor-' + item.title.split(' ').join('-')} defaultValue={item.title}></input>
+                    <span className={"indvListItem-" + item._id}>{item.title}</span>
+                    <div className={"editBar editBarFor-" + item._id}>
+                        <input type="text" className={'editInput editValueFor-' + item._id} defaultValue={item.title}></input>
                         <button 
                             className="submitEdit" 
-                            onClick={() => this.props.editItem(item.title, document.querySelector('.editValueFor-' + item.title.split(' ').join('-')).value)}>Add
+                            onClick={() => this.props.editItem(item._id, document.querySelector('.editValueFor-' + item._id).value)}>Add
                         </button>
                     </div>
                 </div>
                 <div className="itemBtns">
                 <button className="btn editBtn" onClick={() => { 
-                    document.querySelector('.indvListItem-' + item.title.split(' ').join('-')).style.display = 'none';
-                    document.querySelector('.editBarFor-' + item.title.split(' ').join('-')).style.display = 'initial';
+                    console.log('.indvListItem-' + item._id)
+                    document.querySelector('.indvListItem-' + item._id).style.display = 'none';
+                    document.querySelector('.editBarFor-' + item._id).style.display = 'initial';
                 }}>Edit</button>
                 <button 
                     className={"btn deleteItem item-" + index} 
