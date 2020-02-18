@@ -13,7 +13,7 @@ class ListItem extends React.Component {
 
         let listItems;
 
-        listItems = this.state.props.data.map((item, index) => 
+        listItems = this.state.props.map((item, index) => 
             <li key={item.title + '-' + index}>
                 <div className={"indv-item item-" + index} >
                     <span className={"indvListItem-" + item._id}>{item.title}</span>

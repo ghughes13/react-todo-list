@@ -16,18 +16,23 @@ function App() {
     try {
       axios
       .get("http://localhost:9000/getData")
-      .then(data => setlistData(data))
+      .then(data => setlistData(data.data))
       .then(console.log(listData))
       .then(console.log('ran reqntd'));
+      console.log(listData.find((o, i) => {
+        if(o.title === "test") {
+          
+        }
+      }))
     } catch(error) {
       console.error('error: ', error);
     }
   }
 
   const getElementID = (el) => { //GETS THE DB ID ASSOCIATED WITH AN ITEM 
-      for(let i = 0; i < listData.data.length; i ++) {
-        if(listData.data[i].title === el) {
-          return listData.data[i]._id;
+      for(let i = 0; i < listData.length; i ++) {
+        if(listData[i].title === el) {
+          return listData[i]._id;
         } 
     }
   }
@@ -39,7 +44,9 @@ function App() {
       data: {
         delThis: getElementID(itemToDelete)
       }
-    });
+    })
+    // .then(data => console.log(data))
+    .then(console.log(listData)) 
   };
 
   const editItem = (itemToEdit, updatedText) => {
