@@ -7,26 +7,35 @@ import axios from 'axios';
 function App() {
 
   const [listData, setlistData] = useState([])
+  let dataStuffs = null;
+
 
   useEffect(() => {
     requestToDoList()
   }, []);
 
-  const requestToDoList = () => {
-    try {
-      axios
+  const requestToDoList = async () => {
+    await axios
       .get("http://localhost:9000/getData")
-      .then(data => setlistData(data.data))
-      .then(console.log(listData))
-      .then(console.log('ran reqntd'));
-      console.log(listData.find((o, i) => {
-        if(o.title === "test") {
-          
-        }
-      }))
-    } catch(error) {
+      .then(data => {
+        dataStuffs = data.data;
+        setlistData(dataStuffs)
+        console.log('Data: ', data.data)
+        console.log('list Data after update: ', listData)
+        console.log("THis is dataStuffs!!:", dataStuffs)
+    })
+      .then(console.log('List Data: ', listData))
+      .then(console.log('ran reqntd'))
+      .catch(error => {
       console.error('error: ', error);
-    }
+    });
+
+    console.log('=============')
+    // console.log(listData.find((o, i) => {
+    //   if(o.title === "test") {
+    //     return null
+    //   }
+    // }))
   }
 
   const getElementID = (el) => { //GETS THE DB ID ASSOCIATED WITH AN ITEM 
