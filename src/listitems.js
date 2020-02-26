@@ -8,12 +8,8 @@ function ListItem(newProps) {
 
     useEffect(() => {
         setProps(newProps)
-        console.log('updated')
     }, [newProps]);
     
-
-    console.log('Props: ', props.toDoItems)
-
     let listItems = props.toDoItems.map((item, index) => 
         <li key={item.title + '-' + index}>
             <div className={"indv-item item-" + index} >
@@ -28,7 +24,6 @@ function ListItem(newProps) {
             </div>
             <div className="itemBtns">
             <button className="btn editBtn" onClick={() => { 
-                console.log('.indvListItem-' + item._id)
                 document.querySelector('.indvListItem-' + item._id).style.display = 'none';
                 document.querySelector('.editBarFor-' + item._id).style.display = 'initial';
             }}>Edit</button>

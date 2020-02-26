@@ -6,9 +6,7 @@ import axios from 'axios';
 
 function App() {
 
-  const [listData, setlistData] = useState([])
-  let dataStuffs = null;
-
+  const [listData, setListData] = useState([])
 
   useEffect(() => {
     requestToDoList()
@@ -18,24 +16,11 @@ function App() {
     await axios
       .get("http://localhost:9000/getData")
       .then(data => {
-        dataStuffs = data.data;
-        setlistData(dataStuffs)
-        console.log('Data: ', data.data)
-        console.log('list Data after update: ', listData)
-        console.log("THis is dataStuffs!!:", dataStuffs)
+        setListData(data.data)
     })
-      .then(console.log('List Data: ', listData))
-      .then(console.log('ran reqntd'))
       .catch(error => {
       console.error('error: ', error);
     });
-
-    console.log('=============')
-    // console.log(listData.find((o, i) => {
-    //   if(o.title === "test") {
-    //     return null
-    //   }
-    // }))
   }
 
   const getElementID = (el) => { //GETS THE DB ID ASSOCIATED WITH AN ITEM 
@@ -54,12 +39,12 @@ function App() {
         delThis: getElementID(itemToDelete)
       }
     })
-    // .then(data => console.log(data))
-    .then(console.log(listData)) 
+    .then(res => {
+      setListData(res.data)
+    })
   };
 
   const editItem = (itemToEdit, updatedText) => {
-    console.log(itemToEdit)
     if(updatedText === itemToEdit) {
       document.querySelector('.indvListItem-' + itemToEdit).style.display = 'initial';
       document.querySelector('.editBarFor-' + itemToEdit).style.display = 'none';
@@ -72,8 +57,9 @@ function App() {
         editThis: itemToEdit,
         newText: updatedText
       }
-    }).then(function (response) {
-      console.log(response)
+    })
+    .then(res => {
+      setListData(res.data)
     })
     
     document.querySelector('.indvListItem-' + itemToEdit).style.display = 'initial';
