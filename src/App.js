@@ -14,7 +14,7 @@ function App() {
 
   const requestToDoList = async () => {
     await axios
-      .get("http://localhost:9000/getData")
+      .get("https://api505.herokuapp.com/getData")
       .then(data => {
         setListData(data.data)
     })
@@ -34,7 +34,7 @@ function App() {
   const deleteItem = (itemToDelete) => { //
     axios({
       method: 'delete',
-      url: 'http://localhost:9000/delItem',
+      url: 'https://api505.herokuapp.com/delItem',
       data: {
         delThis: getElementID(itemToDelete)
       }
@@ -52,7 +52,7 @@ function App() {
 
     axios({
       method: 'put',
-      url: 'http://localhost:9000/updateItem',
+      url: 'https://api505.herokuapp.com/updateItem',
       data: {
         editThis: itemToEdit,
         newText: updatedText
@@ -67,7 +67,7 @@ function App() {
   };
 
   const addNewItem = (itemToAdd) => {
-    axios.post('http://localhost:9000/addNew', {title: itemToAdd}) 
+    axios.post('https://api505.herokuapp.com/addNew', {title: itemToAdd}) 
     .then(function (response) {
       if(response.status === 200) {
         requestToDoList();
