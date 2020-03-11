@@ -5,6 +5,6 @@ Created a ToDo List App that connects to a Node Server and interacts with mongoD
 
 ==============================<br>
 Todo:<br>
--Fix bug where it breaks if there are no items
+-Fix bug where it breaks if there are no items<br>
 -Make Responsive<br>
 -Add User Authentication<br>
