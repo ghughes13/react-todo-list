@@ -3,8 +3,7 @@
 ### Description
 Created a ToDo List App that connects to a Node Server and interacts with mongoDB on atlas and executes CRUD operations.
 
-### View Project
-**<a href="https://ghughes-react-todo-list.herokuapp.com/" target="_blank">See the project</a>**
+### <a href="https://ghughes-react-todo-list.herokuapp.com/" target="_blank">View Project</a>
 <br>_*Heroku has to spin up the React app, then the node server so it might take a minute to load. It also breaks if there are no items in the todo list_
 
 ==============================<br>
