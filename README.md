@@ -1,7 +1,7 @@
 # MERN STACK TODO LIST
 
 ### Description
-Created a ToDo List App that connects to a Node Server and interacts with mongoDB on atlas.
+Created a ToDo List App that connects to a Node Server and interacts with mongoDB on atlas and executes CRUD operations.
 
 ### View Project
 **<a href="https://ghughes-react-todo-list.herokuapp.com/" target="_blank">See the project</a>**
