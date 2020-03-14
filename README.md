@@ -11,3 +11,6 @@ Todo:<br>
 -Fix bug where it breaks if there are no items<br>
 -Make Responsive<br>
 -Add User Authentication<br>
+-Add Guest Account
+-Add My Account
+-Make daily list that resets
