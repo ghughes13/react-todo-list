@@ -25,7 +25,7 @@ function App() {
 
   const requestToDoList = async () => {
     await axios
-      .get("http://localhost:9000/getToDoList") //localhost:9000.com
+      .get("https://api505.herokuapp.com/getToDoList") //localhost:9000.com
       .then(data => {
         setListData(data.data)
     })
@@ -36,7 +36,7 @@ function App() {
   
   const requestDailyToDo = async () => {
     await axios
-      .get("http://localhost:9000/getDailyToDoList") //localhost:9000.com
+      .get("https://api505.herokuapp.com/getDailyToDoList")
       .then(data => {
         console.log(data.data);
         data = data.data.filter((item, index) => {
@@ -63,7 +63,7 @@ function App() {
   const deleteItem = (itemToDelete) => { //
     axios({
       method: 'delete',
-      url: 'http://localhost:9000/delItem',
+      url: 'https://api505.herokuapp.com/delItem',
       data: {
         delThis: getElementID(itemToDelete, listData)
       }
@@ -80,7 +80,7 @@ function App() {
     }
     axios({
       method: 'put',
-      url: 'http://localhost:9000/updateItem',
+      url: 'https://api505.herokuapp.com/updateItem',
       data: {
         editThis: itemToEdit,
         newText: updatedText
@@ -95,7 +95,7 @@ function App() {
   };
 
   const addNewItem = (itemToAdd) => {
-    axios.post('http://localhost:9000/addNew', {task: itemToAdd}) 
+    axios.post('https://api505.herokuapp.com/addNew', {task: itemToAdd}) 
     .then(function (response) {
       if(response.status === 200) {
         requestToDoList();
@@ -106,7 +106,7 @@ function App() {
   }
 
   const validateLogin = (username, password) => {
-    axios.post('http://localhost:9000/validateLogin', {username: username, password: password}) 
+    axios.post('https://api505.herokuapp.com/validateLogin', {username: username, password: password}) 
     //Sending Username and password
     //Server will reply with whether use is auth'd or not. 
     .then(res => {
@@ -127,7 +127,7 @@ function App() {
     let id = getElementID(itemToComplete, dailyToDoList)
     axios({
       method: 'put',
-      url: 'http://localhost:9000/updateDailyItem',
+      url: 'https://api505.herokuapp.com/updateDailyItem',
       data: {
         editThis: id,
       }
