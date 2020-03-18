@@ -67,24 +67,45 @@ li:last-child {
   color: white;
 }
 
-h1 {
+h1,
+h2 {
   flex-grow: 1;
   font-size: 1.5em;
   letter-spacing: 2px;
   font-weight: normal;
+  margin-block-start: 0.83em;
+  margin-block-end: 0.83em;
 }
 
 .header {
   color: #FFF;
-  padding: 5px 10px;
   text-align: center;
   display: flex;
   align-items: center;
-  background-color: #5B45B9;
-  border-bottom: solid 2px #D4CAFF;
+  justify-content: space-between;
+  background-color: #e8e7e7;
+  border-bottom: solid 4px #D4CAFF;
 }
 
-input[type=text] {
+.header h1,
+.header h2 {
+  padding: 5px 15px;
+}
+
+.todo-tab {
+  flex-grow: 1;
+  text-align: left;
+  border-radius: 0 6px 0px 0;
+  background-color: #5B45B9; 
+}
+
+.daily-tab {
+  background: #D4CAFF;
+  border-radius: 6px 0 0;
+}
+
+input[type=text],
+input[type=password] {
   flex-grow: 1;
   border-width: 0 0 1px 0;
   margin: 15px 10px 15px 15px;
@@ -93,7 +114,7 @@ input[type=text] {
   background-color: #5B45B9;
   border-style: none;
   text-shadow: none;
-  text-transform: uppercase;
+  text-transform: none;
   color: #C7BCF8;
   letter-spacing: 2px;
   outline: none;
@@ -165,4 +186,8 @@ input.editInput,
   height: 35px;
   padding: 0 15px;
   text-align: center;
+}
+
+.indv-item span {
+  text-transform: none !important;
 }
