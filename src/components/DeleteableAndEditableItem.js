@@ -7,16 +7,32 @@ export default function ListItem(newProps) {
     useEffect(() => {
         setProps(newProps)
     }, [newProps]);
+
+    
+    const checkIfKeyIsEnter = (e, itemID) => {
+        if (e.key === 'Enter') {
+            addEdit(itemID);                                  
+        }
+    }
+
+    const addEdit = (itemID) => {
+        props.editItem(itemID, document.querySelector('.editValueFor-' + itemID).value)
+    }
     
     let listItems = props.toDoItems.map((item, index) => 
         <li key={item.task + '-' + index}>
             <div className={"indv-item item-" + index} >
                 <span className={"indvListItem-" + item._id}>{item.task}</span>
                 <div className={"editBar editBarFor-" + item._id}>
-                    <input type="text" className={'editInput editValueFor-' + item._id} defaultValue={item.task}></input>
+                    <input 
+                        type="text" 
+                        className={'editInput editValueFor-' + item._id} 
+                        defaultValue={item.task} 
+                        onKeyPress={(e) => checkIfKeyIsEnter(e, item._id)}>
+                    </input>
                     <button 
                         className="submitEdit" 
-                        onClick={() => props.editItem(item._id, document.querySelector('.editValueFor-' + item._id).value)}>Add
+                        onClick={() => addEdit(item._id)}>Add
                     </button>
                 </div>
             </div>

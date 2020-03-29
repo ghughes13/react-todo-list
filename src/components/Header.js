@@ -2,20 +2,19 @@ import React from 'react';
 
 export default function Header(props) {
 
-  console.log(props);
-
-  const callRequestDailyToDoAndDisplayDaily = () => {
+  const callRequestDailyToDoAndDisplayDaily = (theList) => {
       props.requestDailyToDo();
-      props.displayThisList() 
+      console.log(theList)
+      props.getListToDisplay(theList) 
   }
 
   return (
     <div className="header">
-    <div className="todo-tab">
-      <h1 onClick={callRequestDailyToDoAndDisplayDaily}>To-Do List</h1>
+    <div className="todo-tab" onClick={(e) => callRequestDailyToDoAndDisplayDaily(e.target.id)}>
+      <h1 id="todo">To-Do List</h1>
     </div>
-    <div className="daily-tab" onClick={callRequestDailyToDoAndDisplayDaily}>            
-      <h2>Daily List</h2>
+    <div className="daily-tab" onClick={(e) => callRequestDailyToDoAndDisplayDaily(e.target.id)}>            
+      <h2 id="daily">Daily List</h2>
     </div>
     </div>
   );

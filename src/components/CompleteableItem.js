@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-export default function DailyListItem(newProps) {
+export default function Repeatable(newProps) {
 
     const [props, setProps] = useState(newProps);
 

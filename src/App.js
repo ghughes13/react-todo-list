@@ -1,11 +1,11 @@
 import React, {useState, useEffect } from 'react';
 import axios from 'axios';
 
-import ListItems from './components/ToDoListItem';
+import ListItems from './components/DeleteableAndEditableItem';
 import AddNewItem from './components/AddNewItem'
 import Login from './components/Login';
 import Header from './components/Header'
-import DailyListItem from './components/DailyToDoLi'
+import Repeatable from './components/CompleteableItem'
 
 import './styles/App.css';
 
@@ -14,14 +14,17 @@ function App() {
 
   const [listData, setListData] = useState([]);
   const [dailyToDoList, setDailyToDoList] = useState([]);
+  // const [weeklyToDoList, setWeeklyToDoList] = useState([])
   const [listToDisplay, setListToDisplay] = useState('todo');
 
   const [isLoggedin, setIsLoggedin] = useState(true); //set to false for login screen display
-  const [thisUser, setThisUser] = useState();
+  // const [thisUser, setThisUser] = useState();
   
   useEffect(() => {
     requestToDoList()
   }, []);
+
+
 
   const requestToDoList = async () => {
     await axios
@@ -42,15 +45,14 @@ function App() {
         data = data.data.filter((item, index) => {
           return item.complete === false
         })
-        console.log('======')
-        console.log(data);
-        console.log('======')
         setDailyToDoList(data)
     })
       .catch(error => {
       console.error('error: ', error);
     });
   }
+
+
 
   const getElementID = (el, whatListToCheck, ) => { //GETS THE DB ID ASSOCIATED WITH AN ITEM 
       for(let i = 0; i < whatListToCheck.length; i ++) {
@@ -59,6 +61,8 @@ function App() {
         } 
     }
   }
+
+
 
   const deleteItem = (itemToDelete) => { //
     axios({
@@ -72,6 +76,8 @@ function App() {
       setListData(res.data)
     })
   };
+
+
 
   const editItem = (itemToEdit, updatedText) => {
     if(updatedText === itemToEdit) {
@@ -94,6 +100,8 @@ function App() {
     document.querySelector('.editBarFor-' + itemToEdit).style.display = 'none';
   };
 
+
+
   const addNewItem = (itemToAdd) => {
     axios.post('https://api505.herokuapp.com/addNew', {task: itemToAdd}) 
     .then(function (response) {
@@ -105,6 +113,8 @@ function App() {
     });
   }
 
+
+
   const validateLogin = (username, password) => {
     axios.post('https://api505.herokuapp.com/validateLogin', {username: username, password: password}) 
     //Sending Username and password
@@ -114,13 +124,10 @@ function App() {
     })
   }
 
-  const displayThisList = () => {
-    setListToDisplay('daily')
-  }
 
-  const displayOtherList = () => {
-    setListToDisplay('todo')
-  }
+  const getListToDisplay = (list) => {
+    setListToDisplay(list)
+  } 
 
   const markComplete = (itemToComplete) => {
     console.log('marking');
@@ -137,6 +144,8 @@ function App() {
     })
   }
 
+
+  
   if(!isLoggedin) {
     return (
       <Login loginFunct={validateLogin}/>
@@ -146,7 +155,7 @@ function App() {
       if(listToDisplay === 'todo') {
         return (
           <div className="App">
-            <Header requestDailyToDo={requestDailyToDo} displayThisList={displayThisList} />
+            <Header requestDailyToDo={requestDailyToDo} getListToDisplay={getListToDisplay} />
             <div className="list-container">
               <ListItems toDoItems={listData} deleteItem={deleteItem} editItem={editItem}/>
             </div>
@@ -156,9 +165,9 @@ function App() {
       } else if (listToDisplay === 'daily') {
         return (
           <div className="App">
-            <Header requestDailyToDo={requestDailyToDo} displayThisList={displayOtherList} />
+            <Header requestDailyToDo={requestDailyToDo} getListToDisplay={getListToDisplay} />
             <div className="list-container">
-              <DailyListItem toDoItems={dailyToDoList} markComplete={markComplete} />
+              <Repeatable toDoItems={dailyToDoList} markComplete={markComplete} />
             </div>
           </div>
         );
