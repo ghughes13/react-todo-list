@@ -1,21 +1,21 @@
 import React from 'react';
+import { Link } from '@reach/router'
+import "../styles/header.css"
 
 export default function Header(props) {
 
   const callRequestDailyToDoAndDisplayDaily = (theList) => {
       props.requestDailyToDo();
-      console.log(theList)
-      props.getListToDisplay(theList) 
   }
 
   return (
     <div className="header">
-    <div className="todo-tab" onClick={(e) => callRequestDailyToDoAndDisplayDaily(e.target.id)}>
+    <Link to="/todo" className="todo-tab" onClick={(e) => callRequestDailyToDoAndDisplayDaily(e.target.id)}>
       <h1 id="todo">To-Do List</h1>
-    </div>
-    <div className="daily-tab" onClick={(e) => callRequestDailyToDoAndDisplayDaily(e.target.id)}>            
+    </Link>
+    <Link to="/daily" className="daily-tab" onClick={(e) => callRequestDailyToDoAndDisplayDaily(e.target.id)}>            
       <h2 id="daily">Daily List</h2>
-    </div>
+    </Link>
     </div>
   );
 }

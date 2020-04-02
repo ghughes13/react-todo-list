@@ -1,5 +1,6 @@
 import React, {useState, useEffect } from 'react';
 import axios from 'axios';
+import { Router, Link } from "@reach/router"
 
 import ListItems from './components/DeleteableAndEditableItem';
 import AddNewItem from './components/AddNewItem'
@@ -15,7 +16,6 @@ function App() {
   const [listData, setListData] = useState([]);
   const [dailyToDoList, setDailyToDoList] = useState([]);
   // const [weeklyToDoList, setWeeklyToDoList] = useState([])
-  const [listToDisplay, setListToDisplay] = useState('todo');
 
   const [isLoggedin, setIsLoggedin] = useState(true); //set to false for login screen display
   // const [thisUser, setThisUser] = useState();
@@ -124,11 +124,6 @@ function App() {
     })
   }
 
-
-  const getListToDisplay = (list) => {
-    setListToDisplay(list)
-  } 
-
   const markComplete = (itemToComplete) => {
     console.log('marking');
     let id = getElementID(itemToComplete, dailyToDoList)
@@ -152,26 +147,20 @@ function App() {
     )
   } else {
     if(listData.length !== 0) {
-      if(listToDisplay === 'todo') {
         return (
           <div className="App">
-            <Header requestDailyToDo={requestDailyToDo} getListToDisplay={getListToDisplay} />
+            <Header requestDailyToDo={requestDailyToDo} />
             <div className="list-container">
-              <ListItems toDoItems={listData} deleteItem={deleteItem} editItem={editItem}/>
+            <Router>
+              <ListItems toDoItems={listData} deleteItem={deleteItem} editItem={editItem} path="/todo" />
+              <Repeatable toDoItems={dailyToDoList} markComplete={markComplete} path="/daily" />
+            </Router>
             </div>
-            <AddNewItem addNewItem={addNewItem} />
+            <Router>
+              <AddNewItem addNewItem={addNewItem} path="/todo" />
+            </Router>
           </div>
         );
-      } else if (listToDisplay === 'daily') {
-        return (
-          <div className="App">
-            <Header requestDailyToDo={requestDailyToDo} getListToDisplay={getListToDisplay} />
-            <div className="list-container">
-              <Repeatable toDoItems={dailyToDoList} markComplete={markComplete} />
-            </div>
-          </div>
-        );
-      }
     } else {
       return <h1>Loading...</h1>
     }
