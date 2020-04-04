@@ -1,6 +1,6 @@
 import React, {useState, useEffect } from 'react';
 import axios from 'axios';
-import { Router } from "@reach/router"
+import { Router, navigate } from "@reach/router"
 
 import ListItems from './components/DeleteableAndEditableItem';
 import AddNewItem from './components/AddNewItem'
@@ -124,6 +124,8 @@ function App() {
       if(res.data === false) {
         document.getElementById('login-error').style.display = "block"
         document.getElementById('login-error').classList.add('animate');
+      } else {
+        navigate(`/todo`)
       }
     })
   }
@@ -152,6 +154,7 @@ function App() {
       <Login loginFunct={validateLogin}/>
     )
   } else {
+
     if(listData.length !== 0) {
         return (
           <div className="App">
