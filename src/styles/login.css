@@ -1,3 +1,9 @@
+.login h2 {
+  text-align: center;
+  color: #5B45B9;
+  font-weight: 700;
+}
+
 .login .credentials {
   display: flex;
   flex-direction: column;
@@ -8,13 +14,7 @@
   margin-top: 25vh;
   padding: 25px;
   padding-top: 30px;
-}
-
-.login .credentials label {
-  margin: 0px 15px;
-  letter-spacing: 2px;
-  margin-top: 10px;
-  margin-bottom: 0px;
+  border-radius: 5px;
 }
 
 .login .credentials input {
@@ -50,4 +50,31 @@
 .login button:active {
   background: #a18aff;
   color: white;
+}
+
+.login #login-error {
+  display: none;
+  text-align: center;
+}
+
+.login #login-error.animate p {
+  color: red;
+  font-weight: 700;
+  position: relative;
+  animation: loginError;
+  animation-duration: .25s;
+}
+
+@keyframes loginError {
+  0% {
+    left: -25px;
+  } 25% {
+    left: 25px;
+  } 50% {
+    left: -25px;
+  } 75% {
+    left: 25px;
+  } 100% {
+    left: 0;
+  }
 }

@@ -1,6 +1,6 @@
 import React, {useState, useEffect } from 'react';
 import axios from 'axios';
-import { Router, Link } from "@reach/router"
+import { Router } from "@reach/router"
 
 import ListItems from './components/DeleteableAndEditableItem';
 import AddNewItem from './components/AddNewItem'
@@ -17,7 +17,7 @@ function App() {
   const [dailyToDoList, setDailyToDoList] = useState([]);
   // const [weeklyToDoList, setWeeklyToDoList] = useState([])
 
-  const [isLoggedin, setIsLoggedin] = useState(true); //set to false for login screen display
+  const [isLoggedin, setIsLoggedin] = useState(false); //set to false for login screen display
   // const [thisUser, setThisUser] = useState();
   
   useEffect(() => {
@@ -116,13 +116,19 @@ function App() {
 
 
   const validateLogin = (username, password) => {
-    axios.post('https://api505.herokuapp.com/validateLogin', {username: username, password: password}) 
-    //Sending Username and password
-    //Server will reply with whether use is auth'd or not. 
+    document.getElementById('login-error').classList.remove('animate');
+    axios.post('http://localhost:9000/validateLogin', {username: username, password: password}) 
     .then(res => {
-      //If user is authed. Request that users list. 
+      console.log(res.data)
+      setIsLoggedin(res.data)
+      if(res.data === false) {
+        document.getElementById('login-error').style.display = "block"
+        document.getElementById('login-error').classList.add('animate');
+      }
     })
   }
+
+
 
   const markComplete = (itemToComplete) => {
     console.log('marking');

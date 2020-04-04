@@ -9,10 +9,14 @@ export default function Login(newProps) {
   return (
     <div className="login-component login">
       <form className="credentials" onSubmit={(e) => e.preventDefault()}>
-        <label htmlFor="username">Username</label>
-        <input type="text" name="username" id="username" placeholder="Leave Blank for Guest account"/>
-        <label htmlFor="password">Password</label>
-        <input type="password" name="password" id="password" placeholder="Leave Blank for Guest account"/>
+        <h2>To-Do List</h2>
+        <div id="login-error">
+          <p>Error: Incorrect username or password</p>
+        </div>
+        {/* <label htmlFor="username">Username</label> */}
+        <input type="text" name="username" id="username" placeholder="Username"/>
+        {/* <label htmlFor="password">Password</label> */}
+        <input type="password" name="password" id="password" placeholder="Password"/>
         <button type="submit" onClick={() => props.loginFunct(document.getElementById('username').value, document.getElementById('password').value )}>Login</button>
       </form>
     </div>
