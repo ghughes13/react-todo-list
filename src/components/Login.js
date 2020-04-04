@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import '../styles/login.css'
 
 export default function Login(newProps) {
 
-  const [props, setProps] = useState(newProps);
+  const [props ] = useState(newProps);
   console.log(props);
   
   return (
