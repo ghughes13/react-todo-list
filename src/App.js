@@ -151,10 +151,10 @@ function App() {
 
   
   if(!isLoggedin) {
-    navigate(`/login`)
+    navigate(`/`)
     return (
       <Router>
-        <Login loginFunct={validateLogin} path="/login" /> 
+        <Login loginFunct={validateLogin} path="/" /> 
       </Router>
     )
   } else {
