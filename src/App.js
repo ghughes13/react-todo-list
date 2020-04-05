@@ -1,6 +1,6 @@
 import React, {useState, useEffect } from 'react';
 import axios from 'axios';
-import { Router, navigate } from "@reach/router"
+import { Router } from "@reach/router"
 
 import ListItems from './components/DeleteableAndEditableItem';
 import AddNewItem from './components/AddNewItem'
@@ -17,7 +17,7 @@ function App() {
   const [dailyToDoList, setDailyToDoList] = useState([]);
   // const [weeklyToDoList, setWeeklyToDoList] = useState([])
 
-  const [isLoggedin, setIsLoggedin] = useState(false); //set to false for login screen display
+  const [isLoggedin, setIsLoggedin] = useState(true); //set to false for login screen display
   // const [thisUser, setThisUser] = useState();
   
   useEffect(() => {
@@ -116,18 +116,18 @@ function App() {
 
 
   const validateLogin = (username, password) => {
-    document.getElementById('login-error').classList.remove('animate');
-    axios.post('https://api505.herokuapp.com/validateLogin', {username: username, password: password}) 
-    .then(res => {
-      console.log(res.data)
-      setIsLoggedin(res.data)
-      if(res.data === false) {
-        document.getElementById('login-error').style.display = "block"
-        document.getElementById('login-error').classList.add('animate');
-      } else {
-        navigate(`/todo`)
-      }
-    })
+    // document.getElementById('login-error').classList.remove('animate');
+    // axios.post('https://api505.herokuapp.com/validateLogin', {username: username, password: password}) 
+    // .then(res => {
+    //   console.log(res.data)
+    //   setIsLoggedin(res.data)
+    //   if(res.data === false) {
+    //     document.getElementById('login-error').style.display = "block"
+    //     document.getElementById('login-error').classList.add('animate');
+    //   } else {
+    //     // navigate(`/todo`)
+    //   }
+    // })
   }
 
 
@@ -150,11 +150,11 @@ function App() {
 
   
   if(!isLoggedin) {
-    navigate(`/login`)
+    // navigate(`/login`)
     return (
-      <Router>
+      // <Router>
         <Login loginFunct={validateLogin} path="/login"/>
-      </Router>
+      // </Router>
     )
   } else {
 
