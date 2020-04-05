@@ -1,6 +1,6 @@
 import React, {useState, useEffect } from 'react';
 import axios from 'axios';
-// import { Router, navigate } from "@reach/router"
+import { Router, navigate } from "@reach/router"
 
 import ListItems from './components/DeleteableAndEditableItem';
 import AddNewItem from './components/AddNewItem'
@@ -151,10 +151,11 @@ function App() {
 
   
   if(!isLoggedin) {
+    navigate(`/login`)
     return (
-      <div>
-        <Login loginFunct={validateLogin} /> 
-      </div>
+      <Router>
+        <Login loginFunct={validateLogin} path="/login" /> 
+      </Router>
     )
   } else {
     if(listData.length !== 0) {
@@ -162,14 +163,14 @@ function App() {
           <div className="App">
             <Header requestDailyToDo={requestDailyToDo} />
             <div className="list-container">
-            <div>
-              <ListItems toDoItems={listData} deleteItem={deleteItem} editItem={editItem}  /> 
-              <Repeatable toDoItems={dailyToDoList} markComplete={markComplete}  /> 
+            <Router>
+              <ListItems toDoItems={listData} deleteItem={deleteItem} editItem={editItem}  path="/todo" /> 
+              <Repeatable toDoItems={dailyToDoList} markComplete={markComplete}  path="/daily" /> 
+            </Router>
             </div>
-            </div>
-            <div>
-              <AddNewItem addNewItem={addNewItem} /> 
-            </div>
+            <Router>
+              <AddNewItem addNewItem={addNewItem} path="/todo" /> 
+            </Router>
           </div>
         );
     } else {
