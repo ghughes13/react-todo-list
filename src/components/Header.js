@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from '@reach/router'
+// import { Link } from '@reach/router'
 import "../styles/header.css"
 
 export default function Header(props) {
@@ -10,12 +10,12 @@ export default function Header(props) {
 
   return (
     <div className="header">
-    <Link to="/todo" className="todo-tab" onClick={(e) => callRequestDailyToDoAndDisplayDaily(e.target.id)}>
+    <div className="todo-tab" onClick={(e) => callRequestDailyToDoAndDisplayDaily(e.target.id)}>
       <h1 id="todo">To-Do List</h1>
-    </Link>
-    <Link to="/daily" className="daily-tab" onClick={(e) => callRequestDailyToDoAndDisplayDaily(e.target.id)}>            
+    </div>
+    <div className="daily-tab" onClick={(e) => callRequestDailyToDoAndDisplayDaily(e.target.id)}>            
       <h2 id="daily">Daily List</h2>
-    </Link>
+    </div>
     </div>
   );
 }

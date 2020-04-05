@@ -1,6 +1,6 @@
 import React, {useState, useEffect } from 'react';
 import axios from 'axios';
-import { Router } from "@reach/router"
+// import { Router } from "@reach/router"
 
 import ListItems from './components/DeleteableAndEditableItem';
 import AddNewItem from './components/AddNewItem'
@@ -116,6 +116,7 @@ function App() {
 
 
   const validateLogin = (username, password) => {
+    console.log('logging in');
     // document.getElementById('login-error').classList.remove('animate');
     // axios.post('https://api505.herokuapp.com/validateLogin', {username: username, password: password}) 
     // .then(res => {
@@ -153,24 +154,23 @@ function App() {
     // navigate(`/login`)
     return (
       // <Router>
-        <Login loginFunct={validateLogin} path="/login"/>
+        <Login loginFunct={validateLogin} /> /* path="/login" */
       // </Router>
     )
   } else {
-
     if(listData.length !== 0) {
         return (
           <div className="App">
             <Header requestDailyToDo={requestDailyToDo} />
             <div className="list-container">
-            <Router>
-              <ListItems toDoItems={listData} deleteItem={deleteItem} editItem={editItem} path="/todo" />
-              <Repeatable toDoItems={dailyToDoList} markComplete={markComplete} path="/daily" />
-            </Router>
+            {/* <Router> */}
+              <ListItems toDoItems={listData} deleteItem={deleteItem} editItem={editItem}  /> {/* path="/todo" */}
+              <Repeatable toDoItems={dailyToDoList} markComplete={markComplete}  /> {/* path="/daily" */}
+            {/* </Router> */}
             </div>
-            <Router>
-              <AddNewItem addNewItem={addNewItem} path="/todo" />
-            </Router>
+            {/* <Router> */}
+              <AddNewItem addNewItem={addNewItem} /> {/* path="/todo" */}
+            {/* </Router> */}
           </div>
         );
     } else {
