@@ -117,18 +117,18 @@ function App() {
 
   const validateLogin = (username, password) => {
     console.log('logging in');
-    // document.getElementById('login-error').classList.remove('animate');
-    // axios.post('https://api505.herokuapp.com/validateLogin', {username: username, password: password}) 
-    // .then(res => {
-    //   console.log(res.data)
-    //   setIsLoggedin(res.data)
-    //   if(res.data === false) {
-    //     document.getElementById('login-error').style.display = "block"
-    //     document.getElementById('login-error').classList.add('animate');
-    //   } else {
-    //     // navigate(`/todo`)
-    //   }
-    // })
+    document.getElementById('login-error').classList.remove('animate');
+    axios.post('https://api505.herokuapp.com/validateLogin', {username: username, password: password}) 
+    .then(res => {
+      console.log(res.data)
+      setIsLoggedin(res.data)
+      if(res.data === false) {
+        document.getElementById('login-error').style.display = "block"
+        document.getElementById('login-error').classList.add('animate');
+      } else {
+        // navigate(`/todo`)
+      }
+    })
   }
 
 
