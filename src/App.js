@@ -1,6 +1,6 @@
 import React, {useState, useEffect } from 'react';
 import axios from 'axios';
-// import { Router } from "@reach/router"
+import { Router, navigate } from "@reach/router"
 
 import ListItems from './components/DeleteableAndEditableItem';
 import AddNewItem from './components/AddNewItem'
@@ -17,7 +17,7 @@ function App() {
   const [dailyToDoList, setDailyToDoList] = useState([]);
   // const [weeklyToDoList, setWeeklyToDoList] = useState([])
 
-  const [isLoggedin, setIsLoggedin] = useState(true); //set to false for login screen display
+  const [isLoggedin, setIsLoggedin] = useState(false); //set to false for login screen display
   // const [thisUser, setThisUser] = useState();
   
   useEffect(() => {
@@ -151,11 +151,11 @@ function App() {
 
   
   if(!isLoggedin) {
-    // navigate(`/login`)
+    navigate(`/login`)
     return (
-      // <Router>
-        <Login loginFunct={validateLogin} /> /* path="/login" */
-      // </Router>
+      <Router>
+        <Login loginFunct={validateLogin} path="/login" /> 
+      </Router>
     )
   } else {
     if(listData.length !== 0) {
@@ -163,14 +163,14 @@ function App() {
           <div className="App">
             <Header requestDailyToDo={requestDailyToDo} />
             <div className="list-container">
-            {/* <Router> */}
-              <ListItems toDoItems={listData} deleteItem={deleteItem} editItem={editItem}  /> {/* path="/todo" */}
-              <Repeatable toDoItems={dailyToDoList} markComplete={markComplete}  /> {/* path="/daily" */}
-            {/* </Router> */}
+            <Router>
+              <ListItems toDoItems={listData} deleteItem={deleteItem} editItem={editItem}  path="/todo" /> 
+              <Repeatable toDoItems={dailyToDoList} markComplete={markComplete}  path="/daily" /> 
+            </Router>
             </div>
-            {/* <Router> */}
-              <AddNewItem addNewItem={addNewItem} /> {/* path="/todo" */}
-            {/* </Router> */}
+            <Router>
+              <AddNewItem addNewItem={addNewItem} path="/todo" /> 
+            </Router>
           </div>
         );
     } else {
