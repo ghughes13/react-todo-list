@@ -126,7 +126,7 @@ function App() {
         document.getElementById('login-error').style.display = "block"
         document.getElementById('login-error').classList.add('animate');
       } else {
-        // navigate(`/todo`)
+        navigate(`/todo`)
       }
     })
   }
