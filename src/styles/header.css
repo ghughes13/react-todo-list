@@ -5,7 +5,7 @@
   align-items: center;
   justify-content: space-between;
   background-color: #e8e7e7;
-  border-bottom: solid 4px #D4CAFF;
+  border-bottom: solid 4px #8373ca;
 }
 
 .header h1,
@@ -17,4 +17,21 @@
 
 .header a {
   text-decoration: none;
+}
+
+.todo-tab {
+  flex-grow: 1;
+  text-align: left;
+  border-radius: 0 6px 0px 0;
+  background-color: #5B45B9; 
+}
+
+.daily-tab {
+  background: #8373ca;
+  border-radius: 6px 6px 0 0 ;
+}
+
+.weekly-tab {
+  background: #aca1dc;
+  border-radius: 6px 6px 0 0 ;
 }

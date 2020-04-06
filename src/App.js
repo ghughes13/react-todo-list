@@ -6,7 +6,7 @@ import ListItems from './components/DeleteableAndEditableItem';
 import AddNewItem from './components/AddNewItem'
 import Login from './components/Login';
 import Header from './components/Header'
-import Repeatable from './components/CompleteableItem'
+import Repeatable from './components/Repeatable'
 
 import './styles/App.css';
 
@@ -14,11 +14,8 @@ import './styles/App.css';
 function App() {
 
   const [listData, setListData] = useState([]);
-  const [dailyToDoList, setDailyToDoList] = useState([]);
-  // const [weeklyToDoList, setWeeklyToDoList] = useState([])
-
-  const [isLoggedin, setIsLoggedin] = useState(false); //set to false for login screen display
-  // const [thisUser, setThisUser] = useState();
+  const [currentRepeatableList, setCurrentRepeatableList] = useState([]);
+  const [isLoggedin, setIsLoggedin] = useState(true); //set to false for login screen display
   
   useEffect(() => {
     requestToDoList()
@@ -28,7 +25,7 @@ function App() {
 
   const requestToDoList = async () => {
     await axios
-      .get("https://api505.herokuapp.com/getToDoList") //localhost:9000.com
+      .get("http://localhost:9000/getToDoList") //http://localhost:9000/ //http://localhost:9000
       .then(data => {
         setListData(data.data)
     })
@@ -37,15 +34,15 @@ function App() {
     });
   }
   
-  const requestDailyToDo = async () => {
+  const requestRepeatableList = async (listToGet) => {
     await axios
-      .get("https://api505.herokuapp.com/getDailyToDoList")
+      .post("http://localhost:9000/getRepeatableList", { listToGet: listToGet })
       .then(data => {
-        console.log(data.data);
         data = data.data.filter((item, index) => {
           return item.complete === false
         })
-        setDailyToDoList(data)
+        console.log(data);
+        setCurrentRepeatableList(data)
     })
       .catch(error => {
       console.error('error: ', error);
@@ -67,7 +64,7 @@ function App() {
   const deleteItem = (itemToDelete) => { //
     axios({
       method: 'delete',
-      url: 'https://api505.herokuapp.com/delItem',
+      url: 'http://localhost:9000/delItem',
       data: {
         delThis: getElementID(itemToDelete, listData)
       }
@@ -77,8 +74,6 @@ function App() {
     })
   };
 
-
-
   const editItem = (itemToEdit, updatedText) => {
     if(updatedText === itemToEdit) {
       document.querySelector('.indvListItem-' + itemToEdit).style.display = 'initial';
@@ -86,7 +81,7 @@ function App() {
     }
     axios({
       method: 'put',
-      url: 'https://api505.herokuapp.com/updateItem',
+      url: 'http://localhost:9000/updateItem',
       data: {
         editThis: itemToEdit,
         newText: updatedText
@@ -100,10 +95,8 @@ function App() {
     document.querySelector('.editBarFor-' + itemToEdit).style.display = 'none';
   };
 
-
-
   const addNewItem = (itemToAdd) => {
-    axios.post('https://api505.herokuapp.com/addNew', {task: itemToAdd}) 
+    axios.post('http://localhost:9000/addNew', {task: itemToAdd}) 
     .then(function (response) {
       if(response.status === 200) {
         requestToDoList();
@@ -118,7 +111,7 @@ function App() {
   const validateLogin = (username, password) => {
     console.log('logging in');
     document.getElementById('login-error').classList.remove('animate');
-    axios.post('https://api505.herokuapp.com/validateLogin', {username: username, password: password}) 
+    axios.post('http://localhost:9000/validateLogin', {username: username, password: password}) 
     .then(res => {
       console.log(res.data)
       setIsLoggedin(res.data)
@@ -133,18 +126,19 @@ function App() {
 
 
 
-  const markComplete = (itemToComplete) => {
+  const markComplete = (itemToComplete, listName) => {
     console.log('marking');
-    let id = getElementID(itemToComplete, dailyToDoList)
+    let id = getElementID(itemToComplete, currentRepeatableList)
     axios({
       method: 'put',
-      url: 'https://api505.herokuapp.com/updateDailyItem',
+      url: 'http://localhost:9000/markItemComplete',
       data: {
         editThis: id,
+        listToUpdate: window.location.pathname.substring(1)
       }
     })
     .then(res => {
-      setDailyToDoList(res.data)
+      setCurrentRepeatableList(res.data)
     })
   }
 
@@ -161,11 +155,11 @@ function App() {
     if(listData.length !== 0) {
         return (
           <div className="App">
-            <Header requestDailyToDo={requestDailyToDo} />
+            <Header requestRepeatableList={requestRepeatableList} />
             <div className="list-container">
             <Router>
               <ListItems toDoItems={listData} deleteItem={deleteItem} editItem={editItem}  path="/todo" /> 
-              <Repeatable toDoItems={dailyToDoList} markComplete={markComplete}  path="/daily" /> 
+              <Repeatable repeatableListItems={currentRepeatableList} markComplete={markComplete}  path="/repeatable" /> 
             </Router>
             </div>
             <Router>
