@@ -25,7 +25,7 @@ function App() {
 
   const requestToDoList = async () => {
     await axios
-      .get("http://localhost:9000/getToDoList") //http://localhost:9000/ //http://localhost:9000
+      .get("https://api505.herokuapp.com/getToDoList") //https://api505.herokuapp.com/ 
       .then(data => {
         setListData(data.data)
     })
@@ -36,7 +36,7 @@ function App() {
   
   const requestRepeatableList = async (listToGet) => {
     await axios
-      .post("http://localhost:9000/getRepeatableList", { listToGet: listToGet })
+      .post("https://api505.herokuapp.com/getRepeatableList", { listToGet: listToGet })
       .then(data => {
         data = data.data.filter((item, index) => {
           return item.complete === false
@@ -64,7 +64,7 @@ function App() {
   const deleteItem = (itemToDelete) => { //
     axios({
       method: 'delete',
-      url: 'http://localhost:9000/delItem',
+      url: 'https://api505.herokuapp.com/delItem',
       data: {
         delThis: getElementID(itemToDelete, listData)
       }
@@ -81,7 +81,7 @@ function App() {
     }
     axios({
       method: 'put',
-      url: 'http://localhost:9000/updateItem',
+      url: 'https://api505.herokuapp.com/updateItem',
       data: {
         editThis: itemToEdit,
         newText: updatedText
@@ -96,7 +96,7 @@ function App() {
   };
 
   const addNewItem = (itemToAdd) => {
-    axios.post('http://localhost:9000/addNew', {task: itemToAdd}) 
+    axios.post('https://api505.herokuapp.com/addNew', {task: itemToAdd}) 
     .then(function (response) {
       if(response.status === 200) {
         requestToDoList();
@@ -111,7 +111,7 @@ function App() {
   const validateLogin = (username, password) => {
     console.log('logging in');
     document.getElementById('login-error').classList.remove('animate');
-    axios.post('http://localhost:9000/validateLogin', {username: username, password: password}) 
+    axios.post('https://api505.herokuapp.com/validateLogin', {username: username, password: password}) 
     .then(res => {
       console.log(res.data)
       setIsLoggedin(res.data)
@@ -131,7 +131,7 @@ function App() {
     let id = getElementID(itemToComplete, currentRepeatableList)
     axios({
       method: 'put',
-      url: 'http://localhost:9000/markItemComplete',
+      url: 'https://api505.herokuapp.com/markItemComplete',
       data: {
         editThis: id,
         listToUpdate: window.location.pathname.substring(1)
