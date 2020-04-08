@@ -15,6 +15,7 @@ function App() {
 
   const [listData, setListData] = useState([]);
   const [currentRepeatableList, setCurrentRepeatableList] = useState([]);
+  const [currentList, setCurrentList] = useState('todo');
   const [isLoggedin, setIsLoggedin] = useState(false); //set to false for login screen display
   
   useEffect(() => {
@@ -25,7 +26,7 @@ function App() {
 
   const requestToDoList = async () => {
     await axios
-      .get("https://api505.herokuapp.com/getToDoList") //https://api505.herokuapp.com/ 
+      .get("https://api505.herokuapp.com/getToDoList") //
       .then(data => {
         setListData(data.data)
     })
@@ -41,7 +42,7 @@ function App() {
         data = data.data.filter((item, index) => {
           return item.complete === false
         })
-        console.log(data);
+        setCurrentList(listToGet)
         setCurrentRepeatableList(data)
     })
       .catch(error => {
@@ -126,7 +127,7 @@ function App() {
 
 
 
-  const markComplete = (itemToComplete, listName) => {
+  const markComplete = (itemToComplete) => {
     console.log('marking');
     let id = getElementID(itemToComplete, currentRepeatableList)
     axios({
@@ -134,7 +135,7 @@ function App() {
       url: 'https://api505.herokuapp.com/markItemComplete',
       data: {
         editThis: id,
-        listToUpdate: window.location.pathname.substring(1)
+        listToUpdate: currentList
       }
     })
     .then(res => {
