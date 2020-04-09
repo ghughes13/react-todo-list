@@ -27,11 +27,16 @@
 }
 
 .daily-tab {
-  background: #8373ca;
+  background: #7b69c7;
   border-radius: 6px 6px 0 0 ;
 }
 
 .weekly-tab {
-  background: #aca1dc;
+  background: #9c8fd5;
+  border-radius: 6px 6px 0 0 ;
+}
+
+.monthly-tab {
+  background: #bdb4e3;
   border-radius: 6px 6px 0 0 ;
 }

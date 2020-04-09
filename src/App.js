@@ -63,16 +63,19 @@ function App() {
 
 
   const deleteItem = (itemToDelete) => { //
-    axios({
-      method: 'delete',
-      url: 'https://api505.herokuapp.com/delItem',
-      data: {
-        delThis: getElementID(itemToDelete, listData)
-      }
-    })
-    .then(res => {
-      setListData(res.data)
-    })
+    if (window.confirm(`Are you sure you want to mark off "${itemToDelete}"?`)) {
+      console.log('Thing was saved to the database.');
+      axios({
+        method: 'delete',
+        url: 'https://api505.herokuapp.com/delItem',
+        data: {
+          delThis: getElementID(itemToDelete, listData)
+        }
+      })
+      .then(res => {
+        setListData(res.data)
+      })
+    }
   };
 
   const editItem = (itemToEdit, updatedText) => {
@@ -128,19 +131,20 @@ function App() {
 
 
   const markComplete = (itemToComplete) => {
-    console.log('marking');
     let id = getElementID(itemToComplete, currentRepeatableList)
-    axios({
-      method: 'put',
-      url: 'https://api505.herokuapp.com/markItemComplete',
-      data: {
-        editThis: id,
-        listToUpdate: currentList
-      }
-    })
-    .then(res => {
-      setCurrentRepeatableList(res.data)
-    })
+    if (window.confirm(`Are you sure you want to mark off "${itemToComplete}"?`)) {
+      axios({
+        method: 'put',
+        url: 'https://api505.herokuapp.com/markItemComplete',
+        data: {
+          editThis: id,
+          listToUpdate: currentList
+        }
+      })
+      .then(res => {
+        setCurrentRepeatableList(res.data)
+      })
+    }
   }
 
 
