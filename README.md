@@ -3,7 +3,7 @@
 ### Description
 Created a ToDo List App that connects to a Node Server and interacts with mongoDB on atlas and executes CRUD operations.
 
-##Project Demo Video
+### Project Demo Video<br>
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=BG6d-eR8jOY
 " target="_blank"><img src="http://img.youtube.com/vi/BG6d-eR8jOY/0.jpg" 
 alt="Video" width="240" height="180" border="10" /></a>
