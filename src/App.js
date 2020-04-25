@@ -34,20 +34,46 @@ function App() {
       console.error('error: ', error);
     });
   }
+
+  const filterListForCompletedItems  = (items) => {
+    console.log(items);
+    console.log(items);
+    items = items.filter((item) => {
+      return item.complete === false
+    });
+
+    console.log(items);
+    setCurrentRepeatableList(items)
+  }
   
   const requestRepeatableList = async (listToGet) => {
     await axios
       .post("https://api505.herokuapp.com/getRepeatableList", { listToGet: listToGet })
-      .then(data => {
-        data = data.data.filter((item, index) => {
-          return item.complete === false
-        })
+      .then(data => { 
+        filterListForCompletedItems(data.data)
         setCurrentList(listToGet)
-        setCurrentRepeatableList(data)
-    })
-      .catch(error => {
+      }).catch(error => {
       console.error('error: ', error);
     });
+  }
+
+
+  const markComplete = (itemToComplete) => {
+    let id = getElementID(itemToComplete, currentRepeatableList)
+    if (window.confirm(`Are you sure you want to mark off "${itemToComplete}"?`)) {
+      axios({
+        method: 'put',
+        url: 'https://api505.herokuapp.com/markItemComplete',
+        data: {
+          editThis: id,
+          listToUpdate: currentList
+        }
+      })
+      .then(res => {
+        console.log(res.data)
+        filterListForCompletedItems(res.data)
+      })
+    }
   }
 
 
@@ -127,26 +153,6 @@ function App() {
       }
     })
   }
-
-
-
-  const markComplete = (itemToComplete) => {
-    let id = getElementID(itemToComplete, currentRepeatableList)
-    if (window.confirm(`Are you sure you want to mark off "${itemToComplete}"?`)) {
-      axios({
-        method: 'put',
-        url: 'https://api505.herokuapp.com/markItemComplete',
-        data: {
-          editThis: id,
-          listToUpdate: currentList
-        }
-      })
-      .then(res => {
-        setCurrentRepeatableList(res.data)
-      })
-    }
-  }
-
 
   
   if(!isLoggedin) {
