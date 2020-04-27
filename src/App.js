@@ -16,7 +16,7 @@ function App() {
   const [listData, setListData] = useState([]);
   const [currentRepeatableList, setCurrentRepeatableList] = useState([]);
   const [currentList, setCurrentList] = useState('todo');
-  const [isLoggedin, setIsLoggedin] = useState(true); //set to false for login screen display
+  const [isLoggedin, setIsLoggedin] = useState(false); //set to false for login screen display
   
   useEffect(() => {
     requestToDoList()
