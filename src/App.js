@@ -16,7 +16,7 @@ function App() {
   const [listData, setListData] = useState([]);
   const [currentRepeatableList, setCurrentRepeatableList] = useState([]);
   const [currentList, setCurrentList] = useState('todo');
-  const [isLoggedin, setIsLoggedin] = useState(false); //set to false for login screen display
+  const [isLoggedin, setIsLoggedin] = useState(true); //set to false for login screen display
   
   useEffect(() => {
     requestToDoList()
@@ -36,13 +36,10 @@ function App() {
   }
 
   const filterListForCompletedItems  = (items) => {
-    console.log(items);
-    console.log(items);
     items = items.filter((item) => {
       return item.complete === false
     });
 
-    console.log(items);
     setCurrentRepeatableList(items)
   }
   
@@ -90,7 +87,6 @@ function App() {
 
   const deleteItem = (itemToDelete) => { //
     if (window.confirm(`Are you sure you want to mark off "${itemToDelete}"?`)) {
-      console.log('Thing was saved to the database.');
       axios({
         method: 'delete',
         url: 'https://api505.herokuapp.com/delItem',

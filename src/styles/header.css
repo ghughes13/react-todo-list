@@ -2,7 +2,7 @@
   color: #FFF;
   text-align: center;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: space-between;
   background-color: #e8e7e7;
   border-bottom: solid 4px #8373ca;
@@ -13,16 +13,30 @@
   padding: 5px 15px;
   color: white;
   font-weight: 500;
+  padding-top: 0px;
+  transition-duration: .1s;
 }
 
 .header a {
   text-decoration: none;
 }
 
+.header a:hover h1,
+.header a:hover h2 {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.header a.active h1,
+.header a.active h2 {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
 .todo-tab {
   flex-grow: 1;
   text-align: left;
-  border-radius: 0 6px 0px 0;
+  border-radius: 6px 6px 0px 0;
   background-color: #5B45B9; 
 }
 
