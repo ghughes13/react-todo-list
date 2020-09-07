@@ -15,6 +15,7 @@
   font-weight: 500;
   padding-top: 0px;
   transition-duration: .1s;
+  font-size: 1.25em;
 }
 
 .header a {
@@ -52,5 +53,10 @@
 
 .monthly-tab {
   background: #bdb4e3;
+  border-radius: 6px 6px 0 0 ;
+}
+
+.quarterly-tab {
+  background: #a296d7;
   border-radius: 6px 6px 0 0 ;
 }

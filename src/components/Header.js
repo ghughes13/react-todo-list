@@ -42,6 +42,9 @@ export default function Header(props) {
       <Link to="/repeatable" className="monthly-tab tab" onClick={(e) => callRequestDailyToDoAndDisplayDaily(e)}>            
         <h2 id="monthly">Monthly</h2>
       </Link>
+      <Link to="/repeatable" className="quarterly-tab tab" onClick={(e) => callRequestDailyToDoAndDisplayDaily(e)}>            
+        <h2 id="quarterly">Quarterly</h2>
+      </Link>
     </div>
   );
 }
